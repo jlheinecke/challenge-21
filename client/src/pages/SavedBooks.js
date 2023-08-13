@@ -9,19 +9,19 @@ import {
   Col
 } from 'react-bootstrap';
 
-import { GET_ME } from '../utils/queries'; // Import the GET_ME query
-import { REMOVE_BOOK } from '../utils/mutations'; // Import the REMOVE_BOOK mutation
+import { GET_ME } from '../utils/queries';  
+import { REMOVE_BOOK } from '../utils/mutations'; 
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
-  // Define the GET_ME query and useQuery() Hook to execute it on component load
+ 
   const { loading, data: { me: userData } } = useQuery(GET_ME);
   
-  // Define the REMOVE_BOOK mutation
+  
   const [removeBook] = useMutation(REMOVE_BOOK);
 
-  // create function that accepts the book's mongo _id value as param and deletes the book from the database
+ 
   const handleDeleteBook = async (bookId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -35,7 +35,7 @@ const SavedBooks = () => {
       });
 
       if (data) {
-        // upon success, remove book's id from localStorage
+       
         removeBookId(bookId);
       }
     } catch (err) {
@@ -43,7 +43,7 @@ const SavedBooks = () => {
     }
   };
 
-  // if data isn't here yet, say so
+ 
   if (loading) {
     return <h2>LOADING...</h2>;
   }
